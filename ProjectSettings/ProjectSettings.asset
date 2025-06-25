@@ -886,7 +886,7 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Myproject
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: D:\Unity Project\MarriedLoveGame\Assets\WSATestCertificate.pfx
+  metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: RomanticBlessings
   metroCertificateIssuer: RomanticBlessings

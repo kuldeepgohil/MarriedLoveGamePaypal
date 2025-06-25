@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GetPlanAPI : MonoBehaviour
 {
+    public static string communUrl = "https://romantic-blessinggame.appworkdemo.com";
+    //public static string communUrl = "https://trqqxw6z-3057.inc1.devtunnels.ms";
+
+    //public static string communUrl = "https://58f7-122-164-17-137.ngrok-free.app";
+
     public Root availablePlans;
 
     public MembershipPlanElement[] planElemnts;
@@ -19,12 +24,11 @@ public class GetPlanAPI : MonoBehaviour
 
     IEnumerator GetMembershipPlans()
     {
-        string usertoken = PlayerPrefs.GetString("SaveLoginToken");  
+        string usertoken = PlayerPrefs.GetString("SaveLoginToken");
 
         Debug.Log(usertoken);
-        Debug.Log("asjidbfapio");
 
-        string ProfileRequestCodeUrl = commonURLScript.url + "/api/user/membership-plans";
+        string ProfileRequestCodeUrl = communUrl + "/api/user/membership-plans";
 
         UnityWebRequest www = UnityWebRequest.Get(ProfileRequestCodeUrl);
         www.SetRequestHeader("auth", usertoken);
@@ -77,8 +81,11 @@ public class GetPlanAPI : MonoBehaviour
 
     public void OnBackButtonClick()
     {
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("LoginScene");
+        if (!PlayerPrefs.HasKey("plan_name"))
+        {
+            PlayerPrefs.DeleteAll();
+            SceneManager.LoadScene("LoginScene");
+        }
     }
 
 

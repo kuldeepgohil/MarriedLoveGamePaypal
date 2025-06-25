@@ -386,16 +386,16 @@ Use SetNewWindowHandler to adjust at runtime.
 
         public void VerifyPayment()
 		{
-			Debug.Log("Start verification");
+			//Debug.Log("Start verification");
 
-			if(purchaseType == "Membership")
-			{
-                PlanPurchaseManager.instance.VerifyOrder();
-            }
-			else if(purchaseType == "Card")
-			{
-				CardDeckBuyManager.instance.VerifyOrder();
-			}
+			//if(purchaseType == "Membership")
+			//{
+   //             PlanPurchaseManager.instance.VerifyOrder();
+   //         }
+			//else if(purchaseType == "Card")
+			//{
+			//	CardDeckBuyManager.instance.VerifyOrder();
+			//}
         }
 
 	/** Returns true if the browser is ready to take orders. Most actions will be internally delayed until it is. */
