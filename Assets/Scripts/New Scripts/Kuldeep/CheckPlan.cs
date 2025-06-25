@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ZenFulcrum.VR.OpenVRBinding;
+//using ZenFulcrum.VR.OpenVRBinding;
 
 public class CheckPlan : MonoBehaviour
 {

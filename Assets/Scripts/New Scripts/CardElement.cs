@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-using ZenFulcrum.EmbeddedBrowser;
+//using ZenFulcrum.EmbeddedBrowser;
 
 public class CardElement : MonoBehaviour
 {
