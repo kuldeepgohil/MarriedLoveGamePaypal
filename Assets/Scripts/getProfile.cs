@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class getProfile : MonoBehaviour
 {
@@ -213,9 +214,7 @@ public class getProfile : MonoBehaviour
 
             StartCoroutine(GetuserProfile(maleProfilePic, PlayerPrefs.GetString("MaleProfilePic")));
             StartCoroutine(GetuserProfile(femaleProfilePic, PlayerPrefs.GetString("FemaleProfilePic")));
-
-        }  
-
+        }
     }
 
     IEnumerator GetuserProfile(Image pp, string url)
@@ -228,7 +227,6 @@ public class getProfile : MonoBehaviour
         if (w.error != null)
         {
             //Debug.Log("error ");
-         
         }
         else
         {
@@ -250,4 +248,18 @@ public class getProfile : MonoBehaviour
 
     }
 
+    public void Logout()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(0);
+    }
+
+    public void DeleteAccount()
+    {
+        Debug.Log("Delete Account...");
+
+        //Temp Code
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(0);
+    }
 }

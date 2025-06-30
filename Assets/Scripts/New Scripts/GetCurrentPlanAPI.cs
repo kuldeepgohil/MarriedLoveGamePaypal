@@ -76,7 +76,7 @@ public class GetCurrentPlanAPI : MonoBehaviour
         public string order_id;
         public string plan_name;
         public string order_status;
-        public DateTime order_date;
+        public string order_date;
         public bool recurring;
         public string subscription_id;
         public string status;

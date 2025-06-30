@@ -34,7 +34,7 @@ public class StaticId : MonoBehaviour
     public string level5 = "671f5de193074f8291166a4f";
 
     [Header("Card Deck ID")]
-    public string Activity = "672e01e2319d1f832d397644";       
+    public string Activity = "672e01e2319d1f832d397644";
     public string Punishment  = "672e037c319d1f832d39769d";
     public string ShowmeTeaseme = "6731e6cb2fbc87f8c64bb9a7";
 
