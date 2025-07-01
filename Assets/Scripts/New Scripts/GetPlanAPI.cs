@@ -7,11 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GetPlanAPI : MonoBehaviour
 {
-    public static string communUrl = "https://romantic-blessinggame.appworkdemo.com";
-    //public static string communUrl = "https://trqqxw6z-3057.inc1.devtunnels.ms";
-
-    //public static string communUrl = "https://58f7-122-164-17-137.ngrok-free.app";
-
     public Root availablePlans;
 
     public MembershipPlanElement[] planElemnts;
@@ -28,7 +23,7 @@ public class GetPlanAPI : MonoBehaviour
 
         Debug.Log(usertoken);
 
-        string ProfileRequestCodeUrl = communUrl + "/api/user/membership-plans";
+        string ProfileRequestCodeUrl = commonURLScript.url + "/api/user/membership-plans";
 
         UnityWebRequest www = UnityWebRequest.Get(ProfileRequestCodeUrl);
         www.SetRequestHeader("auth", usertoken);

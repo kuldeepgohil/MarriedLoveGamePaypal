@@ -90,7 +90,7 @@ public class MyMembershipPlanCheck : MonoBehaviour
 
                 if (planStatus == "success")
                 {
-                    showPaymentMessageText.text = " Your heart just subscribed to happiness. Welcome aboard!";
+                    showPaymentMessageText.text = "Your heart just subscribed to happiness. Welcome aboard!";
                 }
                 else
                 {

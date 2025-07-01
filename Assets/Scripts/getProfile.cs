@@ -33,6 +33,10 @@ public class getProfile : MonoBehaviour
     public GameObject UpdateUploadTitleMaleTxtImage;
     public GameObject UpdateUploadTitleFeMaleImage;
 
+    public Text deleteErrorText;
+    public Button confirmButton;
+    public Button cancleButton;
+
 
     [System.Serializable]
     public class Activity
@@ -258,8 +262,44 @@ public class getProfile : MonoBehaviour
     {
         Debug.Log("Delete Account...");
 
-        //Temp Code
-        PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene(0);
+        StartCoroutine(DeleteAccountRequest());
+    }
+
+    IEnumerator DeleteAccountRequest()
+    {
+        confirmButton.interactable = false;
+        cancleButton.interactable = false;
+
+        string usertoken = PlayerPrefs.GetString("SaveLoginToken");
+        string url = commonURLScript.url + "/api/user/delete-account";
+
+        UnityWebRequest www = UnityWebRequest.Get(url);
+        www.SetRequestHeader("auth", usertoken);
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.Log("error = " + www.downloadHandler.text);
+            confirmButton.gameObject.SetActive(false);
+            cancleButton.gameObject.SetActive(false);
+            deleteErrorText.text = "Something went wrong...!\r\n\r\nPlease try again.";
+
+            yield return new WaitForSeconds(2);
+
+
+            confirmButton.interactable = true;
+            cancleButton.interactable = true;
+            confirmButton.gameObject.SetActive(true);
+            cancleButton.gameObject.SetActive(true);
+            deleteErrorText.text = "Your account will be deleted...!\r\n\r\nAre you sure?";
+
+            deleteErrorText.transform.parent.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Account deleted Details : " + www.downloadHandler.text);
+
+            Logout();
+        }
     }
 }
