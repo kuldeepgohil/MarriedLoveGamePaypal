@@ -166,15 +166,14 @@ public class MusicManager : MonoBehaviour
 
     private void Awake()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("MusicManager");
+        //GameObject[] objs = GameObject.FindGameObjectsWithTag("MusicManager");
 
-        if (objs.Length > 1)
-        {
-            Destroy(this.gameObject);
-        }
+        //if (objs.Length > 1)
+        //{
+        //    Destroy(this.gameObject);
+        //}
 
-        DontDestroyOnLoad(this.gameObject); 
-
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     private void OnEnable()
@@ -201,7 +200,6 @@ public class MusicManager : MonoBehaviour
         }
 
         SetupMusicButton(); 
-
     }
 
     public void Update()

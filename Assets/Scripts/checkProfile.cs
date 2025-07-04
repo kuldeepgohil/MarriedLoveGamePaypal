@@ -17,6 +17,8 @@ public class checkProfile : MonoBehaviour
     public GameObject profilepop;
     public bool isBothProfileCreated;
 
+    public GameObject musicManager;
+
     private void Awake()
     {
         ins = this;
@@ -64,9 +66,6 @@ public class checkProfile : MonoBehaviour
             var data = www.downloadHandler.text;
             Root userData = JsonUtility.FromJson<Root>(data);
 
-            //kuldeep code
-
-
             if (userData.data.isBothProfileCreated == false)
             {
                 profilepop.SetActive(true);
@@ -77,7 +76,6 @@ public class checkProfile : MonoBehaviour
             } 
 
             isBothProfileCreated =false;
-
         }
         else
         {
@@ -90,17 +88,19 @@ public class checkProfile : MonoBehaviour
             if (userData.data.isBothProfileCreated == false)
             {
                 profilepop.SetActive(true);
+
+                //music off
+                musicManager.SetActive(false);
             }
             else
             {
                 profilepop.SetActive(false);
-            } 
+
+                //music on
+                musicManager.SetActive(true);
+            }
 
             isBothProfileCreated = true;
-
-
         }
-
     } 
-
 }
