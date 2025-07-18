@@ -273,4 +273,9 @@ public class MusicManager : MonoBehaviour
             musicImage.sprite = isMusicOn ? musicOnSprite : musicOffSprite;
         }
     }
+
+    public void ExitBtn()
+    {
+        Application.Quit();
+    }
 }

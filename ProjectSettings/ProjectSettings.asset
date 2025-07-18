@@ -316,6 +316,13 @@ PlayerSettings:
       m_Width: 16
       m_Height: 16
       m_Kind: 0
+  - m_BuildTarget: 
+    m_Icons:
+    - serializedVersion: 2
+      m_Icon: {fileID: 2800000, guid: 7905bdc94f496504792f1f91fbeac46f, type: 3}
+      m_Width: 128
+      m_Height: 128
+      m_Kind: 0
   m_BuildTargetPlatformIcons:
   - m_BuildTarget: Android
     m_Icons:
@@ -884,16 +891,21 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Myproject
+  metroPackageName: RoomsofIntimacy
   metroPackageVersion: 1.0.0.0
   metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: RomanticBlessings
   metroCertificateIssuer: RomanticBlessings
   metroCertificateNotAfter: 80b9143293f9dc01
-  metroApplicationDescription: My project
-  wsaImages: {}
-  metroTileShortName: MarriedLoveGameExe
+  metroApplicationDescription: Rooms of Intimacy
+  wsaImages:
+    65636: Assets/Logo/Logo_50.jpg
+    65661: Assets/Logo/Logo_63.jpg
+    65686: Assets/Logo/Logo_75.jpg
+    65736: Assets/Logo/Logo_100.jpg
+    65936: Assets/Logo/Logo_200.jpg
+  metroTileShortName: RoomOfIntimecy
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
@@ -906,8 +918,11 @@ PlayerSettings:
   metroSplashScreenBackgroundColor: {r: 0.12941177, g: 0.17254902, b: 0.21568628, a: 1}
   metroSplashScreenUseBackgroundColor: 0
   syncCapabilities: 0
-  platformCapabilities: {}
-  metroTargetDeviceFamilies: {}
+  platformCapabilities:
+    WindowsStoreApps:
+      PicturesLibrary: False
+  metroTargetDeviceFamilies:
+    Desktop: True
   metroFTAName: 
   metroFTAFileTypes: []
   metroProtocolName: 

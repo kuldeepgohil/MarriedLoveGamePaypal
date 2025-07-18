@@ -16,7 +16,7 @@ public class SoundManager : MonoBehaviour
     public Sprite soundOffSprite;
 
     public Button soundToggleButton;
-    public bool isSoundOn; 
+    public bool isSoundOn;
 
     public void Awake()
     {
@@ -129,8 +129,7 @@ public class SoundManager : MonoBehaviour
         isSoundOn = !isSoundOn; 
         PlayerPrefs.SetInt("SoundState", isSoundOn ? 1 : 0);
         PlayerPrefs.Save();
-        UpdateSoundButtonImage();  
-
+        UpdateSoundButtonImage();
     }
         
     private void UpdateSoundButtonImage()

@@ -126,9 +126,14 @@ public class CardDeckBuyManager : MonoBehaviour
                     card.GetComponent<CardElement>().deckName = cardList.message[i].name;
                     card.GetComponent<CardElement>().title = cardList.message[i].title;
                     card.GetComponent<CardElement>().discription = cardList.message[i].description;
+                    card.GetComponent<CardElement>().imageURL = cardList.message[i].image;
                     card.GetComponent<CardElement>().price = cardList.message[i].price;
 
                     card.GetComponent<CardElement>().SetupCard();
+
+                    card.GetComponent<CardElement>().discriptionPannel.SetActive(true);
+                    yield return new WaitForSeconds(.1f);
+                    card.GetComponent<CardElement>().discriptionPannel.SetActive(false);
 
                     card.GetComponent<CardElement>().errorPopup = errorPopUp;
                     card.GetComponent<CardElement>().errorText = errorText;
@@ -186,10 +191,15 @@ public class CardDeckBuyManager : MonoBehaviour
                     card.GetComponent<CardElement>().imageURL = userCardList.message.paidCards[i].card_id.image;
                     card.GetComponent<CardElement>().price = userCardList.message.paidCards[i].card_id.price;
 
-                    card.GetComponent<CardElement>().SetupCard();
 
                     card.GetComponent<CardElement>().buyButton.gameObject.SetActive(false);
                     userCardIdList.Add(userCardList.message.paidCards[i].card_id._id);
+
+                    card.GetComponent<CardElement>().SetupCard();
+
+                    card.GetComponent<CardElement>().discriptionPannel.SetActive(true);
+                    yield return new WaitForSeconds(.1f);
+                    card.GetComponent<CardElement>().discriptionPannel.SetActive(false);
                 }
             }
 
@@ -303,11 +313,11 @@ public class CardDeckBuyManager : MonoBehaviour
         public CardDeckId card_deck_id;
         public string unique_id;
         public string category;
-        public int price;
+        public float price;
         public bool status;
         public bool is_deleted;
         public string description;
-        public object image;
+        public string image;
         public string title;
         public DateTime createdAt;
         public DateTime updatedAt;
@@ -342,7 +352,7 @@ public class CardDeckBuyManager : MonoBehaviour
         public CardDeckId card_deck_id;
         public string unique_id;
         public string category;
-        public int price;
+        public float price;
         public bool status;
         public bool is_deleted;
         public string description;
@@ -361,7 +371,7 @@ public class CardDeckBuyManager : MonoBehaviour
         public CardDeckId card_deck_id;
         public string unique_id;
         public string category;
-        public int price;
+        public float price;
         public bool status;
         public bool is_deleted;
         public string description;

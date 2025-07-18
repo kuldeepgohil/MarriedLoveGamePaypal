@@ -44,7 +44,8 @@ public class CardElement : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(GetCardImage(cardImage, communUrl + "/api/images/" + imageURL));
+        StartCoroutine(GetCardImage(cardImage, communUrl + "/api/images/" + imageURL)); 
+        StartCoroutine(SetupDiscription());
     }
 
     public void SetupCard()
@@ -54,7 +55,7 @@ public class CardElement : MonoBehaviour
         titleText.text = title;
         discriptionText.text = discription;
         priceText.text = "<b>$ " + price.ToString() + "</b>";
-        StartCoroutine(SetupDiscription());
+        //StartCoroutine(SetupDiscription());
     }
 
     IEnumerator SetupDiscription()
@@ -174,7 +175,7 @@ public class CardElement : MonoBehaviour
 
     IEnumerator GetCardImage(Image pp, string url)
     {
-        Debug.Log("asduygasfduafasdf");
+        Debug.Log("Image Url : " + url);
 
         string spriteurl = url;
         WWW w = new WWW(spriteurl);
@@ -183,9 +184,7 @@ public class CardElement : MonoBehaviour
 
         if (w.error != null)
         {
-            Debug.Log("error ");
-            //show default image
-            //allgameList[i].banner = defaultIcon;
+            Debug.Log("Error in loading image : " + w.error);
         }
         else
         {

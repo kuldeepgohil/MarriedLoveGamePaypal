@@ -17,7 +17,6 @@ public class checkProfile : MonoBehaviour
     public GameObject profilepop;
     public bool isBothProfileCreated;
 
-    public GameObject musicManager;
 
     private void Awake()
     {
@@ -90,14 +89,14 @@ public class checkProfile : MonoBehaviour
                 profilepop.SetActive(true);
 
                 //music off
-                musicManager.SetActive(false);
+                //musicManager.SetActive(false);
             }
             else
             {
                 profilepop.SetActive(false);
 
                 //music on
-                musicManager.SetActive(true);
+                //musicManager.SetActive(true);
             }
 
             isBothProfileCreated = true;

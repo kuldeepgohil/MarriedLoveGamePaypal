@@ -90,9 +90,9 @@ public class GetPlanAPI : MonoBehaviour
         public string _id;
         public string title;
         public string description;
-        public int monthly_price;
-        public int yearly_price;
-        public int lifetimePrice;
+        public float monthly_price;
+        public float yearly_price;
+        public float lifetimePrice;
         public bool is_lifetime;
         public bool is_active;
         public bool is_deleted;
