@@ -7,22 +7,18 @@ using UnityEngine.UI;
 
 public class PlanPurchaseManager : MonoBehaviour
 {
-    public static string communUrl = "https://romantic-blessinggame.appworkdemo.com";
-    //public static string communUrl = "https://trqqxw6z-3057.inc1.devtunnels.ms";
-    //public static string communUrl = "https://58f7-122-164-17-137.ngrok-free.app";
-
     public static PlanPurchaseManager instance;
     public Root orderDetails;
 
     public GameObject loaderScreen;
 
-    public GameObject memberShipScreen;  
+    public GameObject memberShipScreen;
     public GameObject paymentScreen;
 
     //kuldeep code 
     public GameObject VerifyPanelScreen;
 
-    public string purchaseType;   
+    public string purchaseType;
 
     public GameObject errorPopup;
     public Text errorText;
@@ -134,7 +130,7 @@ public class PlanPurchaseManager : MonoBehaviour
         string paymentMethod = PaymentMethodType.instance.selectedPaymentMethod;
         Debug.Log("Selected Payment Method: " + paymentMethod);
 
-        string url = communUrl + "/api/user/comfirm-buy-membership-plan";
+        string url = commonURLScript.url + "/api/user/comfirm-buy-membership-plan";
         UnityWebRequest www;
 
         string usertoken = PlayerPrefs.GetString("SaveLoginToken");

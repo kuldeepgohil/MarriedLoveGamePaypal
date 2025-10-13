@@ -1,16 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-//using ZenFulcrum.EmbeddedBrowser;
 
 public class CardElement : MonoBehaviour
 {
-    public static string communUrl = "https://romantic-blessinggame.appworkdemo.com";
-    //public static string communUrl = "https://trqqxw6z-3057.inc1.devtunnels.ms";
-
-
     public string id;
     public string deckType;
     public string deckName;
@@ -44,7 +38,7 @@ public class CardElement : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(GetCardImage(cardImage, communUrl + "/api/images/" + imageURL)); 
+        StartCoroutine(GetCardImage(cardImage, commonURLScript.url + "/api/images/" + imageURL));
         StartCoroutine(SetupDiscription());
     }
 
@@ -119,7 +113,7 @@ public class CardElement : MonoBehaviour
         form.AddField("card_id", cardId);
         form.AddField("paymentMethod", paymentMethod); //static for PAYPAL
 
-        string url = communUrl + "/api/user/purchase-card";
+        string url = commonURLScript.url + "/api/user/purchase-card";
 
         UnityWebRequest www = UnityWebRequest.Post(url, form);
 

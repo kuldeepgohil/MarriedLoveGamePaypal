@@ -7,13 +7,10 @@ using UnityEngine.UI;
 
 public class MyMembershipPlanCheck : MonoBehaviour
 {
-
     public static MyMembershipPlanCheck Instance;
     public Root availablePlans;
     private Coroutine membershipCheckCoroutine;
     private Coroutine pendingStatusTimerCoroutine;
-
-    public static string communUrl = "https://romantic-blessinggame.appworkdemo.com";
 
     public GameObject memberShipScreen;
     public GameObject paymentScreen;
@@ -50,7 +47,7 @@ public class MyMembershipPlanCheck : MonoBehaviour
         string usertoken = PlayerPrefs.GetString("SaveLoginToken");
         Debug.Log(usertoken);
 
-        string MyMembershipPlansCodeUrl = communUrl + "/api/user/get-recent-buy-membership-plan";
+        string MyMembershipPlansCodeUrl = commonURLScript.url + "/api/user/get-recent-buy-membership-plan";
         Debug.Log(MyMembershipPlansCodeUrl);
 
         UnityWebRequest www = UnityWebRequest.Get(MyMembershipPlansCodeUrl);

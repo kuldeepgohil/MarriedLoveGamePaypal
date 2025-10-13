@@ -14,8 +14,6 @@ public class UserJustBuyCards : MonoBehaviour
     private Coroutine membershipCheckCoroutine;
     private Coroutine pendingStatusTimerCoroutine;
 
-    public static string communUrl = "https://romantic-blessinggame.appworkdemo.com";
-
     public GameObject CardDeckBuyPannel;
     public GameObject paymentScreen;
 
@@ -48,7 +46,7 @@ public class UserJustBuyCards : MonoBehaviour
         string usertoken = PlayerPrefs.GetString("SaveLoginToken");
         Debug.Log(usertoken);
 
-        string userJustBuyCodeUrl = communUrl + "/api/user/user-recent-buy-cards";
+        string userJustBuyCodeUrl = commonURLScript.url + "/api/user/user-recent-buy-cards";
         Debug.Log(userJustBuyCodeUrl);
 
         UnityWebRequest www = UnityWebRequest.Get(userJustBuyCodeUrl);

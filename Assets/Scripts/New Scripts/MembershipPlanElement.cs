@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class MembershipPlanElement : MonoBehaviour
 {
-    public static string communUrl = "https://romantic-blessinggame.appworkdemo.com";
-    //public static string communUrl = "https://trqqxw6z-3057.inc1.devtunnels.ms"; 
-    //public static string communUrl = "https://58f7-122-164-17-137.ngrok-free.app";
-
     public string id;
     public string type;
     public Text priceText;
@@ -116,7 +112,7 @@ public class MembershipPlanElement : MonoBehaviour
         Debug.Log(paymentMethod);
 
 
-        string url = communUrl + "/api/user/buy-membership-plan";
+        string url = commonURLScript.url + "/api/user/buy-membership-plan";
         UnityWebRequest www = UnityWebRequest.Post(url, form);
         Debug.Log("Auth : " + usertoken);
         www.SetRequestHeader("auth", usertoken);

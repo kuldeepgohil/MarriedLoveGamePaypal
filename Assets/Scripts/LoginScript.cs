@@ -189,7 +189,7 @@ public class LoginScript : MonoBehaviour
                 PlayerPrefs.SetString("SaveLoginId", userIdData.data._id);
                 PlayerPrefs.SetString("SaveLoginToken", userIdData.data.token);
 
-                Debug.LogError(userIdData.data.plan_details.plan_name);
+                Debug.Log(userIdData.data.plan_details.plan_name);
                 
                 if(userIdData.data.plan_details.plan_name == null)
                 {

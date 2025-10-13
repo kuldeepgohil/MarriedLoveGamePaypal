@@ -42,6 +42,17 @@ public class FeedBackSupportAPI : MonoBehaviour
         GetAllRequestList();
     }
 
+    private void Start()
+    {
+        catagoryDropdown.onValueChanged.AddListener(delegate
+        {
+            if (catagoryDropdown.captionText.text.Length > 25)
+            {
+                catagoryDropdown.captionText.text = catagoryDropdown.captionText.text.Substring(0, 25) + "...";
+            }
+        });
+    }
+
     void CreateTickitRequest()
     {
         StartCoroutine(CreateTickit());

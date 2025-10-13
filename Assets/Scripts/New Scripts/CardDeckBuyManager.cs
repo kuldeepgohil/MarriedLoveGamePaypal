@@ -9,12 +9,6 @@ using UnityEngine.UI;
 
 public class CardDeckBuyManager : MonoBehaviour
 {
-    public static string communUrl = "https://romantic-blessinggame.appworkdemo.com";
-    //public static string communUrl = "https://trqqxw6z-3057.inc1.devtunnels.ms";
-
-
-    // public static string communUrl = "https://58f7-122-164-17-137.ngrok-free.app";
-
     public static CardDeckBuyManager instance;
 
     public Sprite selectedImage;
@@ -94,7 +88,7 @@ public class CardDeckBuyManager : MonoBehaviour
     IEnumerator GetCardListAPI()
     {
         string usertoken = PlayerPrefs.GetString("SaveLoginToken");
-        string ProfileRequestCodeUrl = communUrl + "/api/user/cards-list";
+        string ProfileRequestCodeUrl = commonURLScript.url + "/api/user/cards-list";
 
         UnityWebRequest www = UnityWebRequest.Get(ProfileRequestCodeUrl);
         www.SetRequestHeader("auth", usertoken);
@@ -154,7 +148,7 @@ public class CardDeckBuyManager : MonoBehaviour
     IEnumerator GetUserCardListAPI()
     {
         string usertoken = PlayerPrefs.GetString("SaveLoginToken");
-        string ProfileRequestCodeUrl = communUrl + "/api/user/user-cards";
+        string ProfileRequestCodeUrl = commonURLScript.url + "/api/user/user-cards";
 
         UnityWebRequest www = UnityWebRequest.Get(ProfileRequestCodeUrl);
         www.SetRequestHeader("auth", usertoken);
@@ -250,7 +244,7 @@ public class CardDeckBuyManager : MonoBehaviour
         form.AddField("card_id", cardId);
         form.AddField("order_id", cardOrderId);
 
-        string url = communUrl + "/api/user/comfirm-purchase-card";
+        string url = commonURLScript.url + "/api/user/comfirm-purchase-card";
 
         UnityWebRequest www = UnityWebRequest.Post(url, form);
 
