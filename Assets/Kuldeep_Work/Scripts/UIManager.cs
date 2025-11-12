@@ -652,6 +652,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("FrontPorchShowMyCardBtnClick is call ....");
         GamePlayUIAnimation.ins.OpenPopUp(UIManager.Instance.perFormActivity);
 
+        skippButton.interactable = true;
+
         mainPopup.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
         mainPopup.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
         mainPopup.transform.GetChild(0).transform.GetChild(2).gameObject.SetActive(false);

@@ -1366,6 +1366,7 @@ MonoBehaviour:
   urlBtn: {fileID: 1164479117}
   retryImageBtn: {fileID: 572462198}
   startImageBtn: {fileID: 1654028867}
+  skipImageBtn: {fileID: 1780783018}
   timertex: {fileID: 883916650}
   scrollRect: {fileID: 1621414893}
   okRepetCard: {fileID: 16847563}
@@ -29505,7 +29506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 23426.426}
+  m_AnchoredPosition: {x: 0, y: 26597.727}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2030443143

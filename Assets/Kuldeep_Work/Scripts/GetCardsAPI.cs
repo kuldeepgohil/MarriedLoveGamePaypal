@@ -70,6 +70,7 @@ public class GetCardsAPI : MonoBehaviour
     public Button urlBtn;
     public Button retryImageBtn;
     public Button startImageBtn;
+    public Button skipImageBtn;
 
     public GameObject timertex;
 
@@ -330,6 +331,7 @@ public class GetCardsAPI : MonoBehaviour
                 timertex.gameObject.SetActive(false);
                 retryImageBtn.gameObject.SetActive(true);
                 startImageBtn.gameObject.SetActive(false);
+                skipImageBtn.gameObject.SetActive(false);
                 urlBtn.gameObject.SetActive(false); 
                 orgasmAllowedText.gameObject.SetActive(false);
                 removeClothingText.gameObject.SetActive(false);
@@ -376,6 +378,7 @@ public class GetCardsAPI : MonoBehaviour
                 timertex.gameObject.SetActive(true);
                 retryImageBtn.gameObject.SetActive(false);
                 startImageBtn.gameObject.SetActive(true);
+                skipImageBtn.gameObject.SetActive(true);
                 urlBtn.gameObject.SetActive(true);
                 orgasmAllowedText.gameObject.SetActive(true);
                 removeClothingText.gameObject.SetActive(true);
