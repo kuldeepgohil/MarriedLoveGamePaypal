@@ -187,8 +187,7 @@ public class MusicManager : MonoBehaviour
     }
 
     void Start()
-    {  
-
+    {
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
@@ -199,7 +198,23 @@ public class MusicManager : MonoBehaviour
             PlayRandomMusic();
         }
 
-        SetupMusicButton(); 
+        SetupMusicButton();
+
+        if (PlayerPrefs.HasKey("MusicON"))
+        {
+            if(PlayerPrefs.GetInt("MusicON") == 0)
+            {
+                audioSource.Pause();
+                isMusicOn = false;
+                UpdateMusicUI();
+            }
+            else if (PlayerPrefs.GetInt("MusicON") == 1)
+            {
+                audioSource.Play();
+                isMusicOn = true;
+                UpdateMusicUI();
+            }
+        }
     }
 
     public void Update()
@@ -213,7 +228,7 @@ public class MusicManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        SetupMusicButton(); // Reassign button when a new scene loads
+        //SetupMusicButton(); // Reassign button when a new scene loads
     }
 
     private void SetupMusicButton()
@@ -226,15 +241,14 @@ public class MusicManager : MonoBehaviour
                 musicToggleButton = buttonObject.GetComponent<Button>();
                 musicImage = buttonObject.GetComponent<Image>();
             }
-        } 
+        }
         if (musicToggleButton != null)
         {
             musicToggleButton.onClick.RemoveAllListeners();
             musicToggleButton.onClick.AddListener(ToggleMusic);
-        } 
+        }
 
-        UpdateMusicUI(); // Update UI based on the current state 
-
+        UpdateMusicUI(); // Update UI based on the current state
     }
 
     [ContextMenu("change")]
@@ -256,11 +270,13 @@ public class MusicManager : MonoBehaviour
         {
             audioSource.Play();
             Debug.Log("Music started.");
+            PlayerPrefs.SetInt("MusicON", 1);
         }
         else
         {
             audioSource.Pause();
             Debug.Log("Music paused.");
+            PlayerPrefs.SetInt("MusicON", 0);
         }
 
         UpdateMusicUI();
