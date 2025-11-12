@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using DG.Tweening;
 
 
@@ -38,12 +37,12 @@ public class UIManager : MonoBehaviour
     public bool issHisMoveBackSpaces;
 
     public GameObject HisLevelUpBtn;
-    public GameObject HisSecrectRoomBtn;    
-    public GameObject HerLevelDownBtn; 
-    public GameObject HerSecrectRoomBtn;   
+    public GameObject HisSecrectRoomBtn;
+    public GameObject HerLevelDownBtn;
+    public GameObject HerSecrectRoomBtn;
     public GameObject FrontPorchShowMyCardBtn;
-    public GameObject outSideFirePitOkBtn;  
-    
+    public GameObject outSideFirePitOkBtn;
+
     [Header("Her And His Closet")]
     public Text messageTxt;
 
@@ -83,6 +82,8 @@ public class UIManager : MonoBehaviour
 
     public Text loadingTxt;
     public float blinkDuration;
+
+    public Button skippButton;
 
 
     [Header("Plan")]
@@ -164,6 +165,9 @@ public class UIManager : MonoBehaviour
     {  
         mainPopup.SetActive(false);
         perFormActivity.SetActive(true);
+
+        skippButton.interactable = true;
+
         isSatisfiedNo = false;
         GamePlayUIAnimation.ins.ClosePopup(mainPopup);
         GamePlayUIAnimation.ins.OpenPopUp(perFormActivity);
@@ -178,10 +182,90 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("perFormActivityStartBtnClick is call ...");
         Timer.Instance.isTimerRunning = true;
-       // GameManager.Instance.usedCard.Add(GetCardsAPI.Instance.currentCardID);
+
+        skippButton.interactable = false;
+
+        //GameManager.Instance.usedCard.Add(GetCardsAPI.Instance.currentCardID);
         //SoundManager.instance.BtnClickSound(); 
         SoundGameScreen.instance.PlayBtnSound();
     } 
+
+    public void SkipButtonClick()
+    {
+        skippButton.interactable = false;
+
+        SoundGameScreen.instance.PlayBtnSound();
+        //SoundManager.instance.BtnClickSound();
+        mainPopup.SetActive(false);
+        perFormActivity.SetActive(false);
+        satisfiedPopup.SetActive(false);
+
+        GamePlayUIAnimation.ins.ClosePopup(satisfiedPopup);
+
+        if (GameManager.Instance.curTurn == Turn.Male)
+        {
+            maleHighLightBorder.SetActive(false);
+            feMaleHighLightBorder.SetActive(true);
+
+            if (GameManager.Instance.playerFemale.GetComponent<FollowThePath>().curIndex == 14 && isCoinCount == true)
+            {
+                CoinManager.instance.SunroomSpaceFeMale();
+                Debug.LogError(CoinManager.instance.feMalePoint + "SunroomSpaceFeMale");
+                UIManager.Instance.isCoinCount = false;
+            }
+            else if (GameManager.Instance.playerFemale.GetComponent<FollowThePath>().curIndex == 18 && isCoinCount == true)
+            {
+                CoinManager.instance.PunishRoomSpaceFeMale();
+                Debug.LogError(CoinManager.instance.feMalePoint + "PunishRoomSpaceFeMale");
+                UIManager.Instance.isCoinCount = false;
+            }
+            else
+            {
+                CoinManager.instance.ActivitySpaceFeMale();
+                Debug.LogError(CoinManager.instance.feMalePoint + "ActivitySpaceFeMale");
+                UIManager.Instance.isCoinCount = false;
+            }
+
+        }
+        else
+        {
+            maleHighLightBorder.SetActive(true);
+            feMaleHighLightBorder.SetActive(false);
+
+            if (GameManager.Instance.playerMale.GetComponent<FollowThePath>().curIndex == 14 && isCoinCount == true)
+            {
+                CoinManager.instance.SunroomSpaceMale();
+                Debug.LogError(CoinManager.instance.malePoint + "SunroomSpaceMale");
+                UIManager.Instance.isCoinCount = false;
+            }
+            else if (GameManager.Instance.playerMale.GetComponent<FollowThePath>().curIndex == 18 && isCoinCount == true)
+            {
+                CoinManager.instance.PunishRoomSpaceMale();
+                Debug.LogError(CoinManager.instance.malePoint + "PunishRoomSpaceMale");
+                UIManager.Instance.isCoinCount = false;
+            }
+            else
+            {
+                CoinManager.instance.ActivitySpaceMale();
+                Debug.LogError(CoinManager.instance.malePoint + "ActivitySpaceMale");
+                UIManager.Instance.isCoinCount = false;
+            }
+
+        }
+
+        discPanel.SetActive(false);
+
+        if (GameManager.Instance.maleOrgasm == true && GameManager.Instance.feMaleOrgasm == true)
+        {
+            GameManager.Instance.gameoverPanel.SetActive(true);
+            GamePlayUIAnimation.ins.OpenPopUp(GameManager.Instance.gameoverPanel);
+            StartCoroutine(gameOver());
+        }
+        else
+        {
+            GameManager.Instance.gameoverPanel.SetActive(false);
+        }
+    }
 
     public void SatisfiedYesBtn()
     {
@@ -271,7 +355,7 @@ public class UIManager : MonoBehaviour
         //SoundManager.instance.BtnClickSound();
         mainPopup.SetActive(false);
         perFormActivity.SetActive(false);
-        satisfiedPopup.SetActive(false);  
+        satisfiedPopup.SetActive(false);
 
         isSatisfiedNo = true;
 

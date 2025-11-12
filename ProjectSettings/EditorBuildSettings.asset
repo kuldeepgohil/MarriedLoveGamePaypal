@@ -18,3 +18,4 @@ EditorBuildSettings:
     path: Assets/Kuldeep_Work/Scenes/Game Scene.unity
     guid: 72d5dc6fbf2fcd44a88bdfe60b9898a9
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -29,6 +30,8 @@ public class FeedBackSupportAPI : MonoBehaviour
     public Text popUpcatagoryText;
     public Text popUpDiscriptionText;
     public Text popUpresponceText;
+    public TMP_Text popUpDiscriptionTextmesh;
+    public TMP_Text popUpresponceTextmesh;
     public GameObject requestDetailsPopup;
 
 
@@ -198,7 +201,12 @@ public class FeedBackSupportAPI : MonoBehaviour
         //view button click event here
         popUpcatagoryText.text = catagory;
         popUpDiscriptionText.text = "<b> <size=35>Discription : </size> </b>" + discription;
+        popUpDiscriptionTextmesh.text = "<b> <size=35>Discription : </size> </b>" + discription;
+
+        //Chnage for URL support
         popUpresponceText.text = "<b> <size=35>Responce : </size> </b>" + responce;
+        popUpresponceTextmesh.text = "<b> <size=35>Responce : </size> </b>" + responce;
+        popUpresponceTextmesh.GetComponent<TextProcessor>().SetupText();
 
         requestDetailsPopup.SetActive(true);
     }
