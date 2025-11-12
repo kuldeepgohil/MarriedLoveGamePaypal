@@ -98,7 +98,7 @@ public class LoginScript : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         loginButton.onClick.AddListener(LoginRequest);  
     }
 
