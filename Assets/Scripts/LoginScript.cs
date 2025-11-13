@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class LoginScript : MonoBehaviour
 {
@@ -35,7 +34,6 @@ public class LoginScript : MonoBehaviour
     public GameObject forgotscreen;
     public GameObject planPurchasePannel;
 
-
     //-----------------Get Profile-----------------------------
     [System.Serializable]
     public class Data
@@ -58,9 +56,9 @@ public class LoginScript : MonoBehaviour
         public int status;
         public string message;
         public Data data;
-    }  
+    }
 
-    //-----------Login------------------------------------------------
+    //-----------Login-----------------------------------------
     [System.Serializable]
     public class LoginData
     {
@@ -85,7 +83,6 @@ public class LoginScript : MonoBehaviour
         public List<string> product_tag;
     }
 
-
     [System.Serializable]
     public class LoginRoot
     {
@@ -94,12 +91,10 @@ public class LoginScript : MonoBehaviour
         public LoginData data;
     }
 
-
-
     void Start()
     {
         //PlayerPrefs.DeleteAll();
-        loginButton.onClick.AddListener(LoginRequest);  
+        loginButton.onClick.AddListener(LoginRequest);
     }
 
     void LoginRequest()
@@ -113,13 +108,12 @@ public class LoginScript : MonoBehaviour
         Match matchEmail = regex.Match(username);
 
         Regex regex1 = new Regex(@"^[1-9]\d{12}$");
-        Match matchNumber = regex1.Match(username);  
+        Match matchNumber = regex1.Match(username);
 
         if (username.Length == 0)
         {
             EnterAllTxt.text = "Please Enter Email ID";
             Errorpopup.SetActive(true);
-
         }
         else if (!matchEmail.Success)
         {
@@ -135,8 +129,7 @@ public class LoginScript : MonoBehaviour
         else
         {
             StartCoroutine(SendLoginRequest(username, password));
-        } 
-        
+        }
     }
 
     IEnumerator Enteralldata()
@@ -171,7 +164,7 @@ public class LoginScript : MonoBehaviour
         {
             yield return request.SendWebRequest();
 
-            if (request.isNetworkError || request.isHttpError)
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.Log("login error=" + request.downloadHandler.text);
                 LoginRoot userMessage = JsonUtility.FromJson<LoginRoot>(request.downloadHandler.text);
@@ -193,12 +186,10 @@ public class LoginScript : MonoBehaviour
                 
                 if(userIdData.data.plan_details.plan_name == null)
                 {
-
                     //EnterAllTxt.text = "Please Purchase plane";
-                    //Errorpopup.SetActive(true);  
+                    //Errorpopup.SetActive(true);
                     //planPurchasePannel.SetActive(true);
                     SceneManager.LoadScene("Dashboard");
-
                 }
                 else
                 {
@@ -207,16 +198,14 @@ public class LoginScript : MonoBehaviour
                 }
             }
         }
-    }  
+    }
+
     IEnumerator SucessMsg()
     {
         yield return new WaitForSeconds(.3f);
         PlayerPrefs.SetInt("SaveLogin", 1);
         loginSuccessTxt_.color = Color.red;
         loginSuccessTxt_.gameObject.SetActive(false);
-
-
-
         StartCoroutine(SendProfileRequest());
     }
 
@@ -232,21 +221,21 @@ public class LoginScript : MonoBehaviour
         if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
         {  
             Debug.Log("error=" + www.downloadHandler.text);
-            Root userDetails = JsonUtility.FromJson<Root>(www.downloadHandler.text);  
+            Root userDetails = JsonUtility.FromJson<Root>(www.downloadHandler.text);
         }
         else
         {
             var data = www.downloadHandler.text;
-            Debug.Log("userDetails=" + data);  
+            Debug.Log("userDetails=" + data);
 
             Root userDetails = JsonUtility.FromJson<Root>(data);
-            string userID = userDetails.data._id;  
+            string userID = userDetails.data._id;
 
             PlayerPrefs.SetString("userIDText", userID);
             PlayerPrefs.SetString("userFullName", userDetails.data.fullName);
             PlayerPrefs.SetString("usermobileEmail", userDetails.data.email);
 
-         /*   Debug.LogError(userDetails.data.plan_name);
+         /* Debug.LogError(userDetails.data.plan_name);
             PlayerPrefs.SetString("plan_name",userDetails.data.plan_name); */
 
             if(PlayerPrefs.GetString("plan_name") == "Null")
@@ -276,8 +265,8 @@ public class LoginScript : MonoBehaviour
             passwordInput.contentType = InputField.ContentType.Password;
             passwordInput.ForceLabelUpdate();
             Showpwdbtn.GetComponent<Image>().sprite = Image2;
-        }  
-    }  
+        }
+    }
 
     public void changeScreen()
     {
@@ -285,12 +274,11 @@ public class LoginScript : MonoBehaviour
         passwordInput.text = "";
         signupscreen.SetActive(true);
     }
-        
+
     public void clickforgotScreen()
     {
         usernameInput.text = "";
         passwordInput.text = "";
         forgotscreen.SetActive(true);
     }
-
 }

@@ -7,7 +7,7 @@ public class TextProcessor : MonoBehaviour, IPointerClickHandler
 {
     private static readonly string urlPattern = @"(https?://[^\s]+)";
 
-    public TMP_Text uiText;  // Reference to your TMP_Text component
+    public TMP_Text uiText; // Reference to your TMP_Text component
 
     // Method to format the text, highlighting URLs and making them clickable
     public string FormatTextWithLinks(string inputText)
@@ -24,7 +24,7 @@ public class TextProcessor : MonoBehaviour, IPointerClickHandler
     public void SetupText()
     {
         if (uiText == null)
-            uiText = GetComponent<TMP_Text>();  // Make sure the TMP_Text is referenced
+            uiText = GetComponent<TMP_Text>(); // Make sure the TMP_Text is referenced
 
         // Example backend text with a URL
         string backendText = uiText.text;
@@ -47,7 +47,7 @@ public class TextProcessor : MonoBehaviour, IPointerClickHandler
     // Pointer click event handler
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Pointer Clicked");  // Debug message to confirm the click
+        Debug.Log("Pointer Clicked"); // Debug message to confirm the click
 
         // Check if the click intersects with a link
         int linkIndex = TMP_TextUtilities.FindIntersectingLink(uiText, eventData.position, null);
@@ -57,9 +57,8 @@ public class TextProcessor : MonoBehaviour, IPointerClickHandler
         {
             // Get the link ID (URL)
             string url = uiText.textInfo.linkInfo[linkIndex].GetLinkID();
-            Debug.Log("Opening URL: " + url);  // Log the URL being opened
-
-            OpenURL(url);  // Open the URL in the browser
+            Debug.Log("Opening URL: " + url); // Log the URL being opened
+            OpenURL(url); // Open the URL in the browser
         }
         else
         {
