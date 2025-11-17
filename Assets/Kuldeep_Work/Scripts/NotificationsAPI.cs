@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Unity.VisualScripting;
+using TMPro;
+using UnityEngine.EventSystems;
 
 
 public class NotificationsAPI : MonoBehaviour
@@ -44,7 +46,7 @@ public class NotificationsAPI : MonoBehaviour
     [Header("Prefab and Parent Setup")]
     public GameObject notificationsPrefab;
     public Transform parentTransform;
-    public GameObject mainImage;  
+    public GameObject mainImage;
 
 
     [Header("API URL")]
@@ -64,7 +66,7 @@ public class NotificationsAPI : MonoBehaviour
        StartCoroutine(NotificationsRequest());
     }
     public void NotiEvent()
-    {   
+    {
        StartCoroutine(NotificationsRequest());
     }
 
@@ -104,11 +106,11 @@ public class NotificationsAPI : MonoBehaviour
                     StartCoroutine(GetNotificationsImage(faqItem.gameObject.transform.GetChild(0).gameObject.GetComponent<Image>(),
                         commonURLScript.imgURL + notifications.image));
 
-                    faqItem.gameObject.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
+                    faqItem.gameObject.transform.GetChild(1).gameObject.transform.GetChild(2).gameObject.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() =>
                     {
                         if (notifications.link== "")
                         {
-                            Application.OpenURL("https://www.google.com/");
+                            Application.OpenURL("https://marriedlovegames.com/");
                             Debug.Log("Null URL");
                         }
                         else
@@ -156,6 +158,9 @@ public class NotificationsAPI : MonoBehaviour
         Text questionText = faqItem.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         Text answerText = faqItem.transform.GetChild(1).gameObject.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
 
+        TMP_Text answerTextmesh = faqItem.transform.GetChild(1).gameObject.gameObject.transform.GetChild(2).gameObject.GetComponent<TMP_Text>();
+        answerTextmesh.GetComponent<TextProcessor>().SetupText();
+
         Button toggleButton = faqItem.transform.GetChild(1).gameObject.GetComponent<Button>();
 
         // Assign question text
@@ -171,6 +176,9 @@ public class NotificationsAPI : MonoBehaviour
         answerText.text = fullAnswer.Length > minCharacterLimit
             ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText
             : fullAnswer;
+        answerTextmesh.text = fullAnswer.Length > minCharacterLimit
+            ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText
+            : fullAnswer;
 
         // Add listener to the toggle button
         toggleButton.onClick.AddListener(() =>
@@ -179,11 +187,42 @@ public class NotificationsAPI : MonoBehaviour
             answerText.text = isExpanded
                 ? (fullAnswer.Length > maxCharacterLimit ? fullAnswer.Substring(0, maxCharacterLimit) : fullAnswer)
                 : (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText : fullAnswer);
-            //: (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) : fullAnswer);
-            StartCoroutine(FixSize());
 
+            answerTextmesh.text = isExpanded
+                 ? (fullAnswer.Length > maxCharacterLimit ? fullAnswer.Substring(0, maxCharacterLimit) : fullAnswer)
+                 : (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText : fullAnswer);
+
+            //: (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) : fullAnswer);
+            answerTextmesh.GetComponent<TextProcessor>().SetupText();
+
+            StartCoroutine(FixSize());
         });
+
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback.AddListener((data) =>
+        {
+            if (answerTextmesh.GetComponent<TextProcessor>().openUrl)
+            {
+                return;
+            }
+            isExpanded = !isExpanded;
+            answerText.text = isExpanded
+                ? (fullAnswer.Length > maxCharacterLimit ? fullAnswer.Substring(0, maxCharacterLimit) : fullAnswer)
+                : (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText : fullAnswer);
+
+            answerTextmesh.text = isExpanded
+                 ? (fullAnswer.Length > maxCharacterLimit ? fullAnswer.Substring(0, maxCharacterLimit) : fullAnswer)
+                 : (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText : fullAnswer);
+
+            //: (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) : fullAnswer);
+            answerTextmesh.GetComponent<TextProcessor>().SetupText();
+            StartCoroutine(FixSize());
+        });
+        answerTextmesh.GetComponent<EventTrigger>().triggers.Add(entry);
     }
+
+    private 
 
     IEnumerator FixSize()
     {

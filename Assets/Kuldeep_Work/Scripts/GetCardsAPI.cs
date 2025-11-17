@@ -164,7 +164,7 @@ public class GetCardsAPI : MonoBehaviour
                 {
                     maleDressLevelID = StaticId.Instance.mlevel5;
                     break;
-                }   
+                }
         }
 
         int femaleDressLevel = GameManager.Instance.femaleDressLevel;

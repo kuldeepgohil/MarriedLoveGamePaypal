@@ -2,10 +2,14 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
-public class TextProcessor : MonoBehaviour, IPointerClickHandler
+public class TextProcessor : MonoBehaviour, IPointerDownHandler
 {
-    private static readonly string urlPattern = @"(https?://[^\s]+)";
+    public bool openUrl;
+
+    //private static readonly string urlPattern = @"(https?://[^\s]+)";
+    private static readonly string urlPattern = @"((https?://[^\s]+)|(www\.[^\s]+))";
 
     public TMP_Text uiText; // Reference to your TMP_Text component
 
@@ -41,12 +45,18 @@ public class TextProcessor : MonoBehaviour, IPointerClickHandler
             return;
         }
 
+        if (!url.StartsWith("http"))
+            url = "https://" + url;
+
+        url = url.TrimEnd(',', '.', '!', '?', ';', ':');
+
         Application.OpenURL(url); // This should open the URL in the browser
     }
 
     // Pointer click event handler
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
+        openUrl = false;
         Debug.Log("Pointer Clicked"); // Debug message to confirm the click
 
         // Check if the click intersects with a link
@@ -55,6 +65,7 @@ public class TextProcessor : MonoBehaviour, IPointerClickHandler
         // If a URL was clicked
         if (linkIndex != -1)
         {
+            openUrl = true;
             // Get the link ID (URL)
             string url = uiText.textInfo.linkInfo[linkIndex].GetLinkID();
             Debug.Log("Opening URL: " + url); // Log the URL being opened

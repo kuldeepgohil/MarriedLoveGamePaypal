@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.EventSystems;
 
 public class faqScript : MonoBehaviour
 {
@@ -58,6 +60,9 @@ public class faqScript : MonoBehaviour
         // Get references to UI elements in the prefab
         Text questionText = faqItem.transform.Find("QuestionText").GetComponent<Text>();
         Text answerText = faqItem.transform.Find("AnswerText").GetComponent<Text>();
+        TMP_Text answerTextmesh = faqItem.transform.Find("Answer TextMesh").GetComponent<TMP_Text>();
+
+
         Button toggleButton = faqItem.transform.GetComponent<Button>();
 
         // Assign question text
@@ -74,6 +79,12 @@ public class faqScript : MonoBehaviour
             ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText
             : fullAnswer;
 
+        answerTextmesh.text = fullAnswer.Length > minCharacterLimit
+            ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText
+            : fullAnswer;
+
+        answerTextmesh.GetComponent<TextProcessor>().SetupText();
+
         // Add listener to the toggle button
         toggleButton.onClick.AddListener(() =>
         {
@@ -81,9 +92,38 @@ public class faqScript : MonoBehaviour
             answerText.text = isExpanded
                 ? (fullAnswer.Length > maxCharacterLimit ? fullAnswer.Substring(0, maxCharacterLimit) : fullAnswer)
                 : (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText : fullAnswer);
-                //: (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) : fullAnswer);
+
+            answerTextmesh.text = isExpanded
+                ? (fullAnswer.Length > maxCharacterLimit ? fullAnswer.Substring(0, maxCharacterLimit) : fullAnswer)
+                : (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText : fullAnswer);
+            
+            answerTextmesh.GetComponent<TextProcessor>().SetupText();
+
             StartCoroutine(FixSize());
         });
+
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback.AddListener((data) =>
+        {
+            if (answerTextmesh.GetComponent<TextProcessor>().openUrl)
+            {
+                return;
+            }
+            isExpanded = !isExpanded;
+            answerText.text = isExpanded
+                ? (fullAnswer.Length > maxCharacterLimit ? fullAnswer.Substring(0, maxCharacterLimit) : fullAnswer)
+                : (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText : fullAnswer);
+
+            answerTextmesh.text = isExpanded
+                 ? (fullAnswer.Length > maxCharacterLimit ? fullAnswer.Substring(0, maxCharacterLimit) : fullAnswer)
+                 : (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) + "                   " + readMoreText : fullAnswer);
+
+            //: (fullAnswer.Length > minCharacterLimit ? fullAnswer.Substring(0, minCharacterLimit) : fullAnswer);
+            answerTextmesh.GetComponent<TextProcessor>().SetupText();
+            StartCoroutine(FixSize());
+        });
+        answerTextmesh.GetComponent<EventTrigger>().triggers.Add(entry);
     }
 
     IEnumerator FixSize()

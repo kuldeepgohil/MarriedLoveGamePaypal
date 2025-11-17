@@ -1,9 +1,10 @@
 using Microsoft.Win32.SafeHandles;
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -85,8 +86,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Start()
-    { 
-
+    {
         isMale = true;
         isFemale = false;
         curTurn = Turn.Female;
@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviour
         maleDressLevel = PlayerPrefs.GetInt("maleDresLevelIndex");
         femaleDressLevel = PlayerPrefs.GetInt("femaleDresLevelIndex");
         loveSetupId = PlayerPrefs.GetString("loveSetupId");
-
     }
 
     public void SkipTurn()
@@ -118,15 +117,13 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Skipping Male's turn...");
             curTurn = Turn.Female;  //test
-
         }
         else if (curTurn == Turn.Female)
         {
             Debug.Log("Skipping Female's turn...");
             curTurn = Turn.Male;  //test
-        }  
-        
-    } 
+        }
+    }
 
     public void Update()
     { 
@@ -150,8 +147,7 @@ public class GameManager : MonoBehaviour
                 UIManager.Instance.HisLevelUpBtn.SetActive(true);
                 UIManager.Instance.HerLevelDownBtn.SetActive(false);
                 UIManager.Instance.outSideFirePitOkBtn.SetActive(false);
-            }    
-
+            }
         }
         else if (curTurn == Turn.Male && playerFemale.GetComponent<FollowThePath>().curIndex == 4)
         {
@@ -176,12 +172,11 @@ public class GameManager : MonoBehaviour
                 UIManager.Instance.HisLevelUpBtn.SetActive(true);
                 UIManager.Instance.HerLevelDownBtn.SetActive(false);
                 UIManager.Instance.outSideFirePitOkBtn.SetActive(false);
-            }  
-
+            }
         }
 
         malePoints = CoinManager.instance.malePoint;
-        feMalePoints = CoinManager.instance.feMalePoint;  
+        feMalePoints = CoinManager.instance.feMalePoint;
 
         maleCurIndex = playerMale.GetComponent<FollowThePath>().curIndex;
         femaleCurIndex = playerFemale.GetComponent<FollowThePath>().curIndex;
@@ -191,6 +186,7 @@ public class GameManager : MonoBehaviour
 
         lastTrun = curTurn.ToString();
         string activitiesBeforeClimexS = PlayerPrefs.GetString("ActivitiesC");
+        Debug.Log("Test : " + activitiesBeforeClimexS);
         activitiesBeforeClimex = int.Parse(activitiesBeforeClimexS);
 
         location = PlayerPrefs.GetString("location");
@@ -198,7 +194,7 @@ public class GameManager : MonoBehaviour
 
         usedCards = GetCardsAPI.Instance.cardjson;
 
- /*     usedCard.Clear(); 
+ /*     usedCard.Clear();
         usedCard.AddRange(activityDeckCardMale);
         usedCard.AddRange(secretDeckCardMale);
         usedCard.AddRange(showMeandTeaseMeDeckCardMale);
@@ -223,13 +219,13 @@ public class GameManager : MonoBehaviour
             usedCardJson += "]";  // Close the JSON array
             usedCards = usedCardJson;
 
-           // Debug.Log("Used Cards JSON: " + usedCards);  
+           // Debug.Log("Used Cards JSON: " + usedCards);
 
         }
         else
-        {   
-            usedCards = "[]";  
-        }   
+        {
+            usedCards = "[]";
+        }
 
         if(gameID==null)
         {
@@ -238,8 +234,7 @@ public class GameManager : MonoBehaviour
         else 
         {
             UIManager.Instance.savePopup.transform.GetChild(0).gameObject.transform.GetChild(4).gameObject.SetActive(false);
-        }  
-
+        }
     }
 
     public IEnumerator gameOver()
@@ -322,6 +317,9 @@ public class GameManager : MonoBehaviour
 
         location = PlayerPrefs.GetString("location");
         toys = PlayerPrefs.GetString("toylist");
+        usedCards = PlayerPrefs.GetString("usedCards");
+
+        usedCard = JsonConvert.DeserializeObject<List<string>>(usedCards);
 
 
         if (PlayerPrefs.HasKey("GameID"))
@@ -342,7 +340,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteKey("malePointss");
         PlayerPrefs.DeleteKey("feMalePointss"); 
         PlayerPrefs.DeleteKey("GameID");
-
+        PlayerPrefs.DeleteKey("usedCards");
     }
 
 }

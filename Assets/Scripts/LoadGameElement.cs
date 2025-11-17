@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class LoadGameElement : MonoBehaviour
 {
     public string gameId;
-    public GameData loaddedData;   
+    public GameData loaddedData;
     public string auth;
 
     public void Start()
@@ -34,22 +35,24 @@ public class LoadGameElement : MonoBehaviour
 
         PlayerPrefs.SetString("lovesetupid", loaddedData.lovesetupid);
 
+        PlayerPrefs.SetString("ActivitiesC", loaddedData.activityBeforeClimax.ToString());
+
         string activitiesBeforeClimexS = PlayerPrefs.GetString("ActivitiesC");
-        int  activitiesBeforeClimex = int.Parse(activitiesBeforeClimexS);
+        int activitiesBeforeClimex = int.Parse(activitiesBeforeClimexS);
 
         PlayerPrefs.SetInt("activitiesBeforeClimex", loaddedData.activityBeforeClimax);
         PlayerPrefs.SetString("location", loaddedData.location);
         PlayerPrefs.SetString("toylist", loaddedData.toys);
-        
-       /* CoinManager.instance.malePoint=loaddedData.malePoint;
-        CoinManager.instance.feMalePoint=loaddedData.feMalePoint;*/
+        PlayerPrefs.SetString("usedCards", loaddedData.usedCards);
+        /* CoinManager.instance.malePoint=loaddedData.malePoint;
+         CoinManager.instance.feMalePoint=loaddedData.feMalePoint;*/
 
-        PlayerPrefs.SetInt("malePointss", loaddedData.malePoint); 
-        PlayerPrefs.SetInt("feMalePointss", loaddedData.feMalePoint); 
+        PlayerPrefs.SetInt("malePointss", loaddedData.malePoint);
+        PlayerPrefs.SetInt("feMalePointss", loaddedData.feMalePoint);
 
-        StartCoroutine(LoadGamelovesetupSubmitRequest());   
+        StartCoroutine(LoadGamelovesetupSubmitRequest());
 
-    }   
+    }
 
     IEnumerator LoadGamelovesetupSubmitRequest()
     { 
@@ -180,7 +183,5 @@ public class LoadGameElement : MonoBehaviour
             //Debug.Log("love setup done is call ...");
             SceneManager.LoadScene("Game Scene");
         }
-
     }
-
 }
