@@ -507,7 +507,7 @@ public class GetCardsAPI : MonoBehaviour
                     {
                         if (resetpwdData.data.url == "")
                         {
-                            Application.OpenURL("https://www.google.com/");
+                            Application.OpenURL("https://marriedlovegames.com/");
                             Debug.Log("Null URL");
                         }
                         else
@@ -518,7 +518,7 @@ public class GetCardsAPI : MonoBehaviour
                     }); 
                     activityTimer = resetpwdData.data.activity_timer.ToString();
                     Timer.Instance.SetTime(activityTimer);
-                }  
+                }
             }
         }
     }

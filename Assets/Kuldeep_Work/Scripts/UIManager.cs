@@ -1228,7 +1228,9 @@ public class UIManager : MonoBehaviour
         StartCoroutine(GetCardsAPI.Instance.GetCardsRequest());
         GamePlayUIAnimation.ins.OpenPopUp(perFormActivity);
         //SoundManager.instance.BtnClickSound();
-        SoundGameScreen.instance.PlayBtnSound(); 
+        SoundGameScreen.instance.PlayBtnSound();
+
+        discPanel.SetActive(false);
     }
 
     public IEnumerator WaitRetryTurn()
