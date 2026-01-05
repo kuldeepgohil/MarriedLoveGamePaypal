@@ -186,13 +186,16 @@ public class GameManager : MonoBehaviour
 
         lastTrun = curTurn.ToString();
         string activitiesBeforeClimexS = PlayerPrefs.GetString("ActivitiesC");
-        Debug.Log("Test : " + activitiesBeforeClimexS);
         activitiesBeforeClimex = int.Parse(activitiesBeforeClimexS);
 
         location = PlayerPrefs.GetString("location");
         toys = PlayerPrefs.GetString("toylist"); 
 
-        usedCards = GetCardsAPI.Instance.cardjson;
+
+        //------DONT use this it is always NULL--------------------
+        //usedCards = GetCardsAPI.Instance.cardjson;
+        //Debug.Log("Used cards : " + GetCardsAPI.Instance.cardjson);
+        //---------------------------------------------------------
 
  /*     usedCard.Clear();
         usedCard.AddRange(activityDeckCardMale);
@@ -216,11 +219,9 @@ public class GameManager : MonoBehaviour
                 usedCardJson = usedCardJson.Substring(0, usedCardJson.Length - 2); // Remove the trailing comma and space
             } 
 
-            usedCardJson += "]";  // Close the JSON array
+            usedCardJson += "]";
             usedCards = usedCardJson;
-
-           // Debug.Log("Used Cards JSON: " + usedCards);
-
+            //Debug.Log("Used cards : " + usedCardJson);
         }
         else
         {
@@ -318,6 +319,8 @@ public class GameManager : MonoBehaviour
         location = PlayerPrefs.GetString("location");
         toys = PlayerPrefs.GetString("toylist");
         usedCards = PlayerPrefs.GetString("usedCards");
+
+        Debug.Log("Used cards : " + PlayerPrefs.GetString("usedCards"));
 
         usedCard = JsonConvert.DeserializeObject<List<string>>(usedCards);
 

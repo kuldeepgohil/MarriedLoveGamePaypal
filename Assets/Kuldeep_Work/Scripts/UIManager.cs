@@ -1230,6 +1230,7 @@ public class UIManager : MonoBehaviour
         //SoundManager.instance.BtnClickSound();
         SoundGameScreen.instance.PlayBtnSound();
 
+        SkipButtonClick();
         discPanel.SetActive(false);
     }
 

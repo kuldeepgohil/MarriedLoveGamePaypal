@@ -100,7 +100,8 @@ public class GetCardsAPI : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        string createuserprofileRequestUrl = commonURLScript.url + "/api/user/cards";
+        //string createuserprofileRequestUrl = commonURLScript.url + "/api/user/cards";
+        string createuserprofileRequestUrl = commonURLScript.url + "/api/user/v1/cards";
         WWWForm form = new WWWForm();
 
         int gameLevel = GameManager.Instance.gameLevel;
@@ -288,46 +289,51 @@ public class GetCardsAPI : MonoBehaviour
                     okRepetCard.gameObject.SetActive(false);
                 }
                 else
-                {  
+                {
                     //check for which list for clear  
-                    //GameManager.Instance.usedCard.Clear();
+                    GameManager.Instance.usedCard.Clear();
+                    GameManager.Instance.secretDeckCardFeMale.Clear();
+                    GameManager.Instance.showMeandTeaseMeDeckCardFeMale.Clear();
+                    GameManager.Instance.activityDeckCardFeMale.Clear();
 
-                    if(GameManager.Instance.curTurn == Turn.Male && GameManager.Instance.playerFemale.GetComponent<FollowThePath>().curIndex==18)
-                    {
-                        GameManager.Instance.secretDeckCardFeMale.Clear();
-                    }
-                    else if (GameManager.Instance.curTurn == Turn.Male && GameManager.Instance.playerFemale.GetComponent<FollowThePath>().curIndex == 14)
-                    {
-                        GameManager.Instance.showMeandTeaseMeDeckCardFeMale.Clear();
-                    }
-                    else
-                    {
-                        GameManager.Instance.activityDeckCardFeMale.Clear();
-                    }
+                    GameManager.Instance.activityDeckCardFeMale.Clear();
+                    GameManager.Instance.showMeandTeaseMeDeckCardMale.Clear();
+                    GameManager.Instance.activityDeckCardMale.Clear();
 
-                    if (GameManager.Instance.curTurn == Turn.Female && GameManager.Instance.playerMale.GetComponent<FollowThePath>().curIndex == 18)
-                    {
-                        GameManager.Instance.secretDeckCardMale.Clear();
-                    }
-                    else if (GameManager.Instance.curTurn == Turn.Female && GameManager.Instance.playerMale.GetComponent<FollowThePath>().curIndex == 14)
-                    {
-                        GameManager.Instance.showMeandTeaseMeDeckCardMale.Clear();
-                    }
-                    else
-                    {
-                        GameManager.Instance.activityDeckCardMale.Clear();
-                    }
+                    //if (GameManager.Instance.curTurn == Turn.Male && GameManager.Instance.playerFemale.GetComponent<FollowThePath>().curIndex==18)
+                    //{
+                    //    GameManager.Instance.secretDeckCardFeMale.Clear();
+                    //}
+                    //else if (GameManager.Instance.curTurn == Turn.Male && GameManager.Instance.playerFemale.GetComponent<FollowThePath>().curIndex == 14)
+                    //{
+                    //    GameManager.Instance.showMeandTeaseMeDeckCardFeMale.Clear();
+                    //}
+                    //else
+                    //{
+                    //    GameManager.Instance.activityDeckCardFeMale.Clear();
+                    //}
+
+                    //if (GameManager.Instance.curTurn == Turn.Female && GameManager.Instance.playerMale.GetComponent<FollowThePath>().curIndex == 18)
+                    //{
+                    //    GameManager.Instance.secretDeckCardMale.Clear();
+                    //}
+                    //else if (GameManager.Instance.curTurn == Turn.Female && GameManager.Instance.playerMale.GetComponent<FollowThePath>().curIndex == 14)
+                    //{
+                    //    GameManager.Instance.showMeandTeaseMeDeckCardMale.Clear();
+                    //}
+                    //else
+                    //{
+                    //    GameManager.Instance.activityDeckCardMale.Clear();
+                    //}
 
                     verticalLayoutGroup.padding.top = 250;
                     activityText.text = "You Don't Have New Cards The Old Cards Will Repeat";
                     StartCoroutine(Onn());
-                    okRepetCard.gameObject.SetActive(true);  
-                    GamePlayUIAnimation.ins.ClosePopup(UIManager.Instance.perFormActivity);   
-
+                    okRepetCard.gameObject.SetActive(true);
+                    GamePlayUIAnimation.ins.ClosePopup(UIManager.Instance.perFormActivity);
                 }
 
                 Debug.Log("Turn change please ");
-               
                 timertex.gameObject.SetActive(false);
                 retryImageBtn.gameObject.SetActive(true);
                 startImageBtn.gameObject.SetActive(false);
