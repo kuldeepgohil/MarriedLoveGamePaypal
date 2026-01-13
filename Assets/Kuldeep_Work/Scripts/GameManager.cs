@@ -132,17 +132,21 @@ public class GameManager : MonoBehaviour
             if (maleDressLevel == 5)
             {
                 Debug.Log("punishmentRemainsImage is call ......");
-                //open punishment for male  
+                //open punishment for male
                 UIManager.Instance.punishmentRemainsImage.SetActive(true);
                 UIManager.Instance.congratsdresslevelupImage.SetActive(false);
+                UIManager.Instance.FrontPorchShowMyCardBtn.SetActive(false);
                 UIManager.Instance.HisLevelUpBtn.SetActive(false);
                 UIManager.Instance.HerLevelDownBtn.SetActive(true);
+                UIManager.Instance.teasemeforfemaleImage.SetActive(false);
+                UIManager.Instance.outSideFirePitOkBtn.SetActive(false);
             }
             else 
             {
                 Debug.Log("congratsdresslevelupImage is call ......");
                 UIManager.Instance.congratsdresslevelupImage.SetActive(true);
                 UIManager.Instance.punishmentRemainsImage.SetActive(false);
+                UIManager.Instance.FrontPorchShowMyCardBtn.SetActive(false);
                 UIManager.Instance.teasemeforfemaleImage.SetActive(false);
                 UIManager.Instance.HisLevelUpBtn.SetActive(true);
                 UIManager.Instance.HerLevelDownBtn.SetActive(false);
@@ -159,15 +163,18 @@ public class GameManager : MonoBehaviour
                 //open show me tease me for female  
                 UIManager.Instance.punishmentRemainsImage.SetActive(false);
                 UIManager.Instance.congratsdresslevelupImage.SetActive(false);
+                UIManager.Instance.FrontPorchShowMyCardBtn.SetActive(false);
                 UIManager.Instance.teasemeforfemaleImage.SetActive(true);
                 UIManager.Instance.HisLevelUpBtn.SetActive(false);
                 UIManager.Instance.HerLevelDownBtn.SetActive(true);
+                UIManager.Instance.outSideFirePitOkBtn.SetActive(false);
             }
             else
             {
                 Debug.Log("congratsdresslevelupImage is call ......222");
                 UIManager.Instance.congratsdresslevelupImage.SetActive(true);
                 UIManager.Instance.punishmentRemainsImage.SetActive(false);
+                UIManager.Instance.FrontPorchShowMyCardBtn.SetActive(false);
                 UIManager.Instance.teasemeforfemaleImage.SetActive(false);
                 UIManager.Instance.HisLevelUpBtn.SetActive(true);
                 UIManager.Instance.HerLevelDownBtn.SetActive(false);

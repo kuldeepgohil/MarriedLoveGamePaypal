@@ -166,6 +166,9 @@ public class UIManager : MonoBehaviour
         mainPopup.SetActive(false);
         perFormActivity.SetActive(true);
 
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
+
         skippButton.interactable = true;
 
         isSatisfiedNo = false;
@@ -454,7 +457,7 @@ public class UIManager : MonoBehaviour
 
         discPanel.SetActive(false);  
 
-        HisLevelUpBtn.gameObject.GetComponent<UnityEngine.UI.Button>().interactable = false;
+        HisLevelUpBtn.gameObject.GetComponent<Button>().interactable = false;
 
         if (GameManager.Instance.curTurn == Turn.Female)
         {
@@ -531,7 +534,7 @@ public class UIManager : MonoBehaviour
                             
                 }
 
-                messageTxt.text = currentMaleDressLevelID + " To " +maleDressLevelID;
+                messageTxt.text = currentMaleDressLevelID + " To " + maleDressLevelID;
 
             }
           
@@ -625,6 +628,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("boy click  HisMoveBackSpaces btn click is call....");   
         mainPopup.SetActive(false);
         discPanel.SetActive(false);
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
         DiceManager.instance.MoveMalePunishmentRoom();     
     }
 
@@ -634,6 +639,9 @@ public class UIManager : MonoBehaviour
         Debug.Log("giri click  HisMoveBackSpaces btn click is call....");
         mainPopup.SetActive(false);
         discPanel.SetActive(false);
+
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
 
         if (GameManager.Instance.curTurn == Turn.Male)
         {
@@ -654,6 +662,8 @@ public class UIManager : MonoBehaviour
 
         skippButton.interactable = true;
 
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
         mainPopup.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
         mainPopup.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
         mainPopup.transform.GetChild(0).transform.GetChild(2).gameObject.SetActive(false);
@@ -715,6 +725,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("ElectricalRoom Male ChangTheGameLevel Up Btn Click");
         Debug.Log("MALE LEVEL IS UP...."); 
         mainPopup.gameObject.SetActive(false);
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
 
         //test
         /*  if (GameManager.Instance.gameLevel < 5)
@@ -784,6 +796,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("MALE LEVEL IS UP....");  
 
         mainPopup.gameObject.SetActive(false);
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
 
         /* if (GameManager.Instance.gameLevel < 5)
          {
@@ -872,6 +886,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("ElectricalRoom Male  Force a player to remove a piece of clothing  Btn Click");
         Debug.Log("MALE CLICK FORCE A PLAYER BTN CLICK ");
         mainPopup.gameObject.SetActive(false);
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
 
         if (GameManager.Instance.curTurn == Turn.Male)
         {
@@ -882,7 +898,13 @@ public class UIManager : MonoBehaviour
         {
             maleHighLightBorder.SetActive(true);
             feMaleHighLightBorder.SetActive(false);
-        } 
+        }
+
+        //Increse Female dress level
+        if (GameManager.Instance.femaleDressLevel < 5)
+        {
+            GameManager.Instance.femaleDressLevel++;
+        }
 
         CoinManager.instance.ForceNonActivePlayertoRemoveClothingMale();
         discPanel.SetActive(false); 
@@ -897,6 +919,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("ElectricalRoom Male  Force a player to remove OnePiece of Clothing Btn Click");
         Debug.Log("MALE CLICK FORCE A PLAYER BTN CLICK ");
         mainPopup.gameObject.SetActive(false);
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
 
         if (GameManager.Instance.curTurn == Turn.Male)
         {
@@ -907,7 +931,13 @@ public class UIManager : MonoBehaviour
         {
             maleHighLightBorder.SetActive(true);
             feMaleHighLightBorder.SetActive(false);
-        } 
+        }
+
+        //Decrease Male dress level
+        if (GameManager.Instance.maleDressLevel > 1)
+        {
+            GameManager.Instance.maleDressLevel--;
+        }
 
         CoinManager.instance.ActivePlayerCanPutBackOnOnePieceofClothingMale();
         discPanel.SetActive(false);
@@ -919,6 +949,7 @@ public class UIManager : MonoBehaviour
 
         Debug.Log("ElectricalRoom Male Sunroom Btn Click");    
         maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
         isSatisfiedNo = true;
         DiceManager.instance.MoveFemaleSunRoom();
         CoinManager.instance.SendNonActivePlayertoSunroomMale();
@@ -931,6 +962,7 @@ public class UIManager : MonoBehaviour
 
         Debug.Log("ElectricalRoom Male Secret PlayRoom Btn Clik");
         maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
         DiceManager.instance.MoveFeMalePunishmentRoom();
         CoinManager.instance.SendNonActivePlayertoPunishRoomMale();
     }
@@ -948,14 +980,6 @@ public class UIManager : MonoBehaviour
         Debug.Log("feMALE LEVEL IS UP....");
         mainPopup.gameObject.SetActive(false);
        
-        
-        //test code  
-      /*  if (GameManager.Instance.gameLevel<5)
-        {   
-           GameManager.Instance.gameLevel++; 
-        }*/
-
-
         planName = PlayerPrefs.GetString("plan_name");
         Debug.LogError(planName);
 
@@ -1016,6 +1040,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("ElectricalRoom FeMale ChangTheGameLevel low Btn Click");
         Debug.Log("feMALE LEVEL IS UP....");
         mainPopup.gameObject.SetActive(false);
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
 
         //test
         /* if (GameManager.Instance.gameLevel < 5)
@@ -1111,6 +1137,8 @@ public class UIManager : MonoBehaviour
         
 
         mainPopup.gameObject.SetActive(false);
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
 
         if (GameManager.Instance.curTurn == Turn.Male)
         {
@@ -1123,11 +1151,14 @@ public class UIManager : MonoBehaviour
             feMaleHighLightBorder.SetActive(false);
         }
 
-        //CoinManager.instance.feMalePoint -= 50;  
+        //Increse Male dress level here
+        if (GameManager.Instance.maleDressLevel < 5)
+        {
+            GameManager.Instance.maleDressLevel++;
+        }
 
         CoinManager.instance.ForceNonActivePlayertoRemoveClothingFeMale();
         discPanel.SetActive(false);
-
     }
 
     public void ElectricalRoomFeMaleForceAPlayerToOnePieceofClothingClothing()
@@ -1139,6 +1170,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("fEMALE CLICK FORCE A PLAYER BTN CLICK ");
             
         mainPopup.gameObject.SetActive(false);
+        maleYellowCard.SetActive(false);
+        femaleYellowCard.SetActive(false);
 
         if (GameManager.Instance.curTurn == Turn.Male)
         {
@@ -1151,9 +1184,14 @@ public class UIManager : MonoBehaviour
             feMaleHighLightBorder.SetActive(false);
         }
 
+        //Decrease Female Dress level here
+        if (GameManager.Instance.femaleDressLevel > 1)
+        {
+            GameManager.Instance.femaleDressLevel--;
+        }
+
         CoinManager.instance.ActivePlayerCanPutBackOnOnePieceofClothingFeMale();
         discPanel.SetActive(false);
-
     }
 
     public void ElectricalRoomFeMaleSunroomBtnClick() 

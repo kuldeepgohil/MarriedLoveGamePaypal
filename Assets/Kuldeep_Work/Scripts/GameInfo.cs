@@ -148,12 +148,20 @@ public class GameInfo : MonoBehaviour
 
         }
 
-        gameLevelss.text = gameLevelID;  
-        climaxNumber.text = GameManager.Instance.activitiesBeforeClimex.ToString();   
+        gameLevelss.text = gameLevelID;
+
+        if(GameManager.Instance.activitiesBeforeClimex > 0)
+        {
+            climaxNumber.text = GameManager.Instance.activitiesBeforeClimex.ToString();
+        }
+        else
+        {
+            climaxNumber.text = "0";
+        }
 
         /*malePoint.text = "0";
-        feMalePoint.text = "0"; */   
-        
+        feMalePoint.text = "0"; */
+
         malePoint.text = CoinManager.instance.malePoint.ToString();
         feMalePoint.text = CoinManager.instance.feMalePoint.ToString();
     }

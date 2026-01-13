@@ -98,17 +98,21 @@ public class FollowThePath : MonoBehaviour
 
                         else if (curIndex == 11)
                         {
-                            Debug.Log("CurIndex 11 is call ...");  //front porch  
+                            Debug.Log("CurIndex 11 is call ...");  //front porch
                             UIManager.Instance.congratsdresslevelupImage.SetActive(false);
                             UIManager.Instance.punishmentRemainsImage.SetActive(false);
                             UIManager.Instance.HisLevelUpBtn.SetActive(false);
                             UIManager.Instance.HisSecrectRoomBtn.SetActive(false);
                             UIManager.Instance.HerLevelDownBtn.SetActive(false);
                             UIManager.Instance.HerSecrectRoomBtn.SetActive(false);
+                            UIManager.Instance.teasemeforfemaleImage.SetActive(false);
                             UIManager.Instance.messageTxt.gameObject.SetActive(false);
                             UIManager.Instance.outSideFirePitOkBtn.SetActive(false); 
+                            UIManager.Instance.maleYellowCard.SetActive(false);
+                            UIManager.Instance.femaleYellowCard.SetActive(false);
+
                             UIManager.Instance.FrontPorchShowMyCardBtn.SetActive(true);
-                            
+
                             GameManager.Instance.ywllowplacePopUpBg.sprite = GameManager.Instance.placeSprite[curIndex - 1];
                             UIManager.Instance.mainPopup.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
                             UIManager.Instance.mainPopup.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
@@ -131,10 +135,13 @@ public class FollowThePath : MonoBehaviour
                             UIManager.Instance.HerLevelDownBtn.SetActive(false);        
                             UIManager.Instance.HerSecrectRoomBtn.SetActive(false);
                             UIManager.Instance.messageTxt.gameObject.SetActive(false);
-                            UIManager.Instance.FrontPorchShowMyCardBtn.SetActive(false); 
+                            UIManager.Instance.teasemeforfemaleImage.SetActive(false);
+                            UIManager.Instance.FrontPorchShowMyCardBtn.SetActive(false);
+                            UIManager.Instance.maleYellowCard.SetActive(false);
+                            UIManager.Instance.femaleYellowCard.SetActive(false);
 
                             UIManager.Instance.outSideFirePitOkBtn.SetActive(true);
-                            GameManager.Instance.ywllowplacePopUpBg.sprite = GameManager.Instance.placeSprite[curIndex - 1]; 
+                            GameManager.Instance.ywllowplacePopUpBg.sprite = GameManager.Instance.placeSprite[curIndex - 1];
 
                             UIManager.Instance.mainPopup.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
                             UIManager.Instance.mainPopup.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(false);
@@ -148,7 +155,11 @@ public class FollowThePath : MonoBehaviour
 
                         if (curIndex == 3 || curIndex == 4) 
                         {
-                            Debug.Log("curIndex is 3 and 4 is call...");  
+                            Debug.Log("curIndex is 3 and 4 is call...");
+
+                            UIManager.Instance.maleYellowCard.SetActive(false);
+                            UIManager.Instance.femaleYellowCard.SetActive(false);
+
 
                             GameManager.Instance.ywllowplacePopUpBg.sprite = GameManager.Instance.placeSprite[curIndex - 1];
                             UIManager.Instance.mainPopup.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
@@ -159,7 +170,9 @@ public class FollowThePath : MonoBehaviour
 
                         }   
                         else if(curIndex==9)
-                        {   
+                        {
+                            UIManager.Instance.maleYellowCard.SetActive(false);
+                            UIManager.Instance.femaleYellowCard.SetActive(false);
 
                             Debug.Log("Player ElectricalRoom in is call .... ");
 
@@ -250,15 +263,17 @@ public class FollowThePath : MonoBehaviour
                             {
                                 cardCategory = "672e01e2319d1f832d397644";  //Activity Deck  
                                 PlayerPrefs.SetString("CardCategory", cardCategory);
-                            } 
+                            }
+
+                            UIManager.Instance.maleYellowCard.SetActive(false);
+                            UIManager.Instance.femaleYellowCard.SetActive(false);
 
                             UIManager.Instance.mainPopup.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
                             UIManager.Instance.mainPopup.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true); 
                             UIManager.Instance.mainPopup.transform.GetChild(0).transform.GetChild(2).gameObject.SetActive(false);   
 
                             UIManager.Instance.mainPopup.SetActive(true);
-                            UIManager.Instance.maleYellowCard.SetActive(false);
-                            UIManager.Instance.femaleYellowCard.SetActive(false);
+ 
 
                             GamePlayUIAnimation.ins.OpenPopUp(UIManager.Instance.mainPopup);
                             //Debug.Log("Card Deck ID : " + PlayerPrefs.GetString("CardCategory"));

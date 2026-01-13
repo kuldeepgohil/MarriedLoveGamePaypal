@@ -15,6 +15,9 @@ public class DiceManager : MonoBehaviour
     public FollowThePath malePlayer;
     public FollowThePath femalePlayer;
 
+    public bool isTesting;
+    public int testDiceValue;
+
     public void Awake()
     {
         instance = this;
@@ -58,8 +61,18 @@ public class DiceManager : MonoBehaviour
     {
         
         GetComponent<Animator>().enabled = false;
-        int value = Random.Range(0, 5);     
-       //int value = 0;
+        int value;     
+
+        if (isTesting)
+        {
+            value = testDiceValue;
+        }
+        else
+        {
+            value = Random.Range(0, 5);
+        }
+
+        //int value = 0;
         curRot = diceRots[value];
         rot = true; 
             
