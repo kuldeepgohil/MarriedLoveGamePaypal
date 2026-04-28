@@ -199,19 +199,7 @@ public class GameManager : MonoBehaviour
         toys = PlayerPrefs.GetString("toylist"); 
 
 
-        //------DONT use this it is always NULL--------------------
-        //usedCards = GetCardsAPI.Instance.cardjson;
-        //Debug.Log("Used cards : " + GetCardsAPI.Instance.cardjson);
-        //---------------------------------------------------------
-
- /*     usedCard.Clear();
-        usedCard.AddRange(activityDeckCardMale);
-        usedCard.AddRange(secretDeckCardMale);
-        usedCard.AddRange(showMeandTeaseMeDeckCardMale);
-        usedCard.AddRange(activityDeckCardFeMale);
-        usedCard.AddRange(secretDeckCardFeMale);
-        usedCard.AddRange(showMeandTeaseMeDeckCardFeMale);*/
-
+    
         if (usedCard.Count > 0)
         {  
             string usedCardJson = "[";  // Start with an opening square bracket for the JSON array
